@@ -1,3 +1,10 @@
+let atributos = {
+  vida: { atual: 10, max: 100 },
+  egni: { atual: 10, max: 100 },
+  sanidade: { atual: 10, max: 100 }
+};
+
+
 let indiceEdicao = null;
 
 function esconderTudo() {
@@ -5,7 +12,9 @@ function esconderTudo() {
   document.getElementById("ficha").style.display = "none";
   document.getElementById("lore").style.display = "none";
   document.getElementById("personagens").style.display = "none";
+  document.getElementById("visualizacaoFicha").style.display = "none"; 
 }
+
 
 function mostrarFicha() {
   esconderTudo();
@@ -190,6 +199,14 @@ function voltarParaListaContos() {
 
 function acessarFicha(index) {
   esconderTudo();
+  atributos.vida = { atual: 10, max: 10 };
+atributos.egni = { atual: 10, max: 10 };
+atributos.sanidade = { atual: 10, max: 10 }; 
+
+atualizarBarra("vida");
+atualizarBarra("egni");
+atualizarBarra("sanidade");
+
 
   const salvos = JSON.parse(localStorage.getItem("personagens") || "[]");
   const p = salvos[index];
@@ -204,9 +221,45 @@ function acessarFicha(index) {
  
   document.getElementById("sabedoriaPassiva").textContent = "15";
   document.getElementById("grauVigor").textContent = "3";
-  document.getElementById("vidaTotal").textContent = "166";
-  document.getElementById("egni").textContent = "60";
+  
+ atributos.vida = { atual: 10, max: 10 };
+atributos.egni = { atual: 10, max: 10 };
+atualizarBarra("vida");
+atualizarBarra("egni");
+
+
   document.getElementById("defesa").textContent = "25";
   document.getElementById("esquiva").textContent = "35";
   document.getElementById("estadoMental").textContent = "Estável";
 }
+
+
+function atualizarBarra(atributo) {
+  const dados = atributos[atributo];
+  const porcentagem = Math.max(0, Math.min(dados.atual / dados.max, 1)) * 100;
+
+  document.getElementById(`barra${capitalize(atributo)}`).style.width = porcentagem + "%";
+  document.getElementById(`texto${capitalize(atributo)}`).textContent = `${dados.atual}/${dados.max}`;
+}
+
+function ajustarAtributo(atributo, delta) {
+  atributos[atributo].atual = Math.max(0, Math.min(atributos[atributo].atual + delta, atributos[atributo].max));
+  atualizarBarra(atributo);
+}
+function ajustarMaximo(atributo, delta) {
+  const dados = atributos[atributo];
+  dados.max = Math.max(1, dados.max + delta); 
+  dados.atual = dados.max; 
+  atualizarBarra(atributo);
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  atualizarBarra("vida");
+  atualizarBarra("egni");
+  atualizarBarra("sanidade");
+
+});

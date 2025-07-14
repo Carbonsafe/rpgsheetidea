@@ -186,25 +186,63 @@
   <h2 id="nomeFicha"></h2>
   <p id="dadosBasicosFicha"></p>
 
-  <div id="atributosCirculo">
-    
-  </div>
+  <div id="atributosCirculo"></div>
 
   <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
     <div class="retangulo">Sabedoria Passiva: <span id="sabedoriaPassiva">—</span></div>
     <div class="retangulo">Grau de Vigor: <span id="grauVigor">—</span></div>
   </div>
 
-  <div style="margin-top: 20px;">
-    <div style="color: #ff6666;">Vida: <span id="vidaTotal">—</span></div>
-    <div style="color: #66ccff;">Egni: <span id="egni">—</span></div>
-    <div>Defesa: <span id="defesa">—</span></div>
-    <div>Esquiva: <span id="esquiva">—</span></div>
-    <div>Estado Mental: <span id="estadoMental">—</span></div>
+  <div class="status-texto">Defesa: <span id="defesa">—</span></div>
+  <div class="status-texto">Esquiva: <span id="esquiva">—</span></div>
+  <div class="status-texto">Estado Mental: <span id="estadoMental">—</span></div>
+
+  <div class="atributo">
+  <label>Egni</label>
+  <div class="barra-container">
+    <button onclick="ajustarMaximo('egni', -1)">«</button>
+    <button onclick="ajustarAtributo('egni', -1)">‹</button>
+    <div class="barra-externa egni">
+      <div class="barra-interna" id="barraEgni"></div>
+      <span class="texto-barra" id="textoEgni">0/0</span>
+    </div>
+    <button onclick="ajustarAtributo('egni', 1)">›</button>
+    <button onclick="ajustarMaximo('egni', 1)">»</button>
   </div>
+</div>
+
+
+  <div class="atributo">
+  <label>Vida</label>
+  <div class="barra-container">
+    <button onclick="ajustarMaximo('vida', -1)">«</button>
+    <button onclick="ajustarAtributo('vida', -1)">‹</button>
+    <div class="barra-externa vida">
+      <div class="barra-interna" id="barraVida"></div>
+      <span class="texto-barra" id="textoVida">0/0</span>
+    </div>
+    <button onclick="ajustarAtributo('vida', 1)">›</button>
+    <button onclick="ajustarMaximo('vida', 1)">»</button>
+  </div>
+</div>
+<div class="atributo">
+  <label>Sanidade</label>
+  <div class="barra-container">
+    <button onclick="ajustarMaximo('sanidade', -1)">«</button>
+    <button onclick="ajustarAtributo('sanidade', -1)">‹</button>
+    <div class="barra-externa sanidade">
+      <div class="barra-interna" id="barraSanidade"></div>
+      <span class="texto-barra" id="textoSanidade">0/0</span>
+    </div>
+    <button onclick="ajustarAtributo('sanidade', 1)">›</button>
+    <button onclick="ajustarMaximo('sanidade', 1)">»</button>
+  </div>
+</div>
+
 
   <button onclick="voltar()">Voltar</button>
 </div>
+
 
 
 <script src="script.js"></script>
